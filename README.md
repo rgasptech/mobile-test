@@ -1,18 +1,33 @@
 # R/GA SP - Teste para Desenvolvedor Mobile
 
-Se você chegou até aqui, deve ser por que você viu alguma vaga publicada pela R/GA por ae, ou então você tem algum interesse em trabalhar conosco.
+Libraries contained in this project:
 
-Se for este o caso, siga em frente......
+- ObjectBox
+  • Used to implement a object oriented the SQLite database easier and faster. PS: It's like the "Hibernate" library.
 
+- Google Gson.
+  • I used google gson to make easier and simple to map the JSON and transform it to custom java objects.
 
-* Faça o fork do repositório
-* De uma olhada no CODE_CHALLENGE.md
-* Crie uma estratégia, por exemplo: trabalhar 5 dias seguidos por duas horas, das 20h as 22h ou então trabalhar 10 dias, segunda a sexta, 1 hora, das 12h as 13h.
-* Faça um Pull Request do seu projeto e pronto!
+- Retrofit.
+  • Used to make fast and simple http requests.
 
+- Butterknife
+  • This library was used to remove some boilerplate codes like "findViewById"
 
-Sua parte está feita, agora é com agente. Na medida do possível, vamos dar uma olhada no seu código e se tudo correr bem, vamos te chamar para um bate papo. Se você morar aqui em SP será bacana vir aqui no nosso escritório na Vila Madalena, mas se for de outra cidade ou estado, podemos fazer via Zoom ou Skype, não tem problema.
+- Picasso
+  • Library to load images from URLs
 
-Passado os tramits técnicos, é a vez do RH. Ele entrará em contato contigo para discutir valores, tempo para início e tal...
+- RxJava
+  • Library to implement the observable pattern easier
 
-Então? Bora lá?
+**How to generate the app**
+
+Download the project and open it via Android Studio. After that, sync gradle project, and then open the "Build" menu and "Make Project".
+
+**General Explanation**
+
+I tried to implement a simple MVP pattern to implement this contacts app.
+
+**Changes to come..**
+
+If I had more time I would add photo to add new contacts, I would try to use "Dagger" for dependency injection. And I would make some Unit tests.
