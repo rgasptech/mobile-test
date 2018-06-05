@@ -1,18 +1,60 @@
 # R/GA SP - Teste para Desenvolvedor Mobile
 
-Se você chegou até aqui, deve ser por que você viu alguma vaga publicada pela R/GA por ae, ou então você tem algum interesse em trabalhar conosco.
+## Gerlandio da Silva Lucena
 
-Se for este o caso, siga em frente......
+###Libs utilizadas
+```ruby
+    pod 'Moya'
+```
+Essa lib é uma abstração do Alamofire, ela adiciona uma camada que permite uma organização mais padronizada de seus endpoints.
+
+```ruby
+    pod 'Reusable'
+```
+Essa lib permite utilizar e registrar células e labels em tableViews de forma mais simples, mesmo que seja uma tarefa simples registrar uma célula, essa lib exige um padrão de nome onde o nome da celula (Indentifier) deve o mesmo da classe.
+
+```ruby
+    pod 'SDWebImage', '~> 4.0'
+```
+Essa lib permite carregar imagens da web e cria um cache delas localmente.
+
+```ruby
+    pod 'R.swift'
+```
+Essa lib mapeia a estrutura de seu resources para criar referências staticas em seu código, evitando erros de digitação.
+
+```ruby
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxRealm'
+```
+Essa lib permite utilizar programação reactiva em seu projeto
+
+```ruby
+    pod 'RealmSwift'
+```
+Essa lib utiliza uma abstração do CoreData que permite salvar e recuperar objetos de forma simples e descomplicada.
+
+###Execução
+
+..* Mude o BundleID do projeto para permitir a execução.
+..* Execute `pod install` na pasta raiz da aplicação
+..* Verifique se o schema correto esta selecionado
+..* Execute a aplicação
+
+### O código
+
+Foi bem difícil relembrar a utilização de programação reativa, inicialmente desenvolvi a tela inicial como padrão e posteriormente fui migrando o pattern para MVVM, onde rolou o segundo desafio. Quando MVVM é conhecido somente em sua base e teoria é muito difícil de saber de fato se seu código esta correto.
+
+Sem dúvidas feri esse pattern de N formas possíveis, mas foi muito gratificante ver minha Massive View Controller diminuir de tamanho conforme evoluia no projeto.
+
+O layout ficou muito simple e se tivesse mais tempo tentaria deixar a aplicação mais sexy aos olhos do usuário, porém as poucas informações diposníveis não davam muita vantagem.
+
+Se houvesse mais tempo procuraria alguma feature que pudesse agregar a esta tela, aparentemente somente cadastrar informações não ajuda muito em questão de proporcionar a melhor experiência, mas sem dúvida, estou mal acostumado com UX/Designer de boa qualidade a minha volta...rsrsrs
+
+Muito obrigado pela chance de aprender um pouco mais sobre esse pattern e me desculpem se cometi alguma gafe imperdoável.
+
+Me mandem os feedbacks para que possa melhorar e passar na próxima por favor.
 
 
-* Faça o fork do repositório
-* De uma olhada no CODE_CHALLENGE.md
-* Crie uma estratégia, por exemplo: trabalhar 5 dias seguidos por duas horas, das 20h as 22h ou então trabalhar 10 dias, segunda a sexta, 1 hora, das 12h as 13h.
-* Faça um Pull Request do seu projeto e pronto!
 
-
-Sua parte está feita, agora é com agente. Na medida do possível, vamos dar uma olhada no seu código e se tudo correr bem, vamos te chamar para um bate papo. Se você morar aqui em SP será bacana vir aqui no nosso escritório na Vila Madalena, mas se for de outra cidade ou estado, podemos fazer via Zoom ou Skype, não tem problema.
-
-Passado os tramits técnicos, é a vez do RH. Ele entrará em contato contigo para discutir valores, tempo para início e tal...
-
-Então? Bora lá?
