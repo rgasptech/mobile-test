@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewCell" rowHeight="37" id="KGk-i7-Jjw" customClass="ContactTableViewCell" customModule="RGAMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="410" height="88.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4Y-c7-Xlv" customClass="ContactView" customModule="RGAMobile" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="410" height="88.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="vk3-4w-1Gu">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6Tv-Ur-90f"/>
+                                    <constraint firstAttribute="height" constant="50" id="djy-bP-nYH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Nome do contato" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iC9-lt-RLq">
+                                <rect key="frame" x="82" y="8" width="247" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="12/10/1986" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsW-6x-yMS">
+                                <rect key="frame" x="339" y="10" width="63" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="contact@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyh-O9-ZeA">
+                                <rect key="frame" x="82" y="34" width="119.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIo-s0-wnq">
+                                <rect key="frame" x="82" y="58" width="318" height="21"/>
+                                <string key="text">Lorem ipsun dolar sit amet Lorem ipsun dolar sit ametLorem ipsun dolar sit ametLorem ipsun dolar sit ametLorem ipsun dolar sit amet Lorem ipsun dolar sit amet Lorem ipsun dolar sit amet Lorem ipsun dolar sit amet</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vk3-4w-1Gu" firstAttribute="top" secondItem="Z4Y-c7-Xlv" secondAttribute="top" constant="8" id="13X-yg-poT"/>
+                            <constraint firstItem="eyh-O9-ZeA" firstAttribute="top" secondItem="iC9-lt-RLq" secondAttribute="bottom" constant="8" id="A7N-RG-x5g"/>
+                            <constraint firstItem="qIo-s0-wnq" firstAttribute="top" secondItem="eyh-O9-ZeA" secondAttribute="bottom" constant="8" id="HNM-h4-ptw"/>
+                            <constraint firstItem="qIo-s0-wnq" firstAttribute="leading" secondItem="eyh-O9-ZeA" secondAttribute="leading" id="L4o-gG-Jkg"/>
+                            <constraint firstItem="iC9-lt-RLq" firstAttribute="top" secondItem="vk3-4w-1Gu" secondAttribute="top" id="Swh-AB-Uar"/>
+                            <constraint firstAttribute="bottom" secondItem="qIo-s0-wnq" secondAttribute="bottom" constant="10" id="WLw-hi-fxS"/>
+                            <constraint firstAttribute="trailing" secondItem="qIo-s0-wnq" secondAttribute="trailing" constant="10" id="Zpn-Cb-l4f"/>
+                            <constraint firstItem="vk3-4w-1Gu" firstAttribute="leading" secondItem="Z4Y-c7-Xlv" secondAttribute="leading" constant="8" id="e6C-df-dqW"/>
+                            <constraint firstItem="KsW-6x-yMS" firstAttribute="centerY" secondItem="iC9-lt-RLq" secondAttribute="centerY" id="mFF-cL-jAE"/>
+                            <constraint firstAttribute="trailing" secondItem="KsW-6x-yMS" secondAttribute="trailing" constant="8" id="nYk-gl-uX3"/>
+                            <constraint firstItem="iC9-lt-RLq" firstAttribute="leading" secondItem="vk3-4w-1Gu" secondAttribute="trailing" constant="24" id="nxW-Ju-lt3"/>
+                            <constraint firstItem="KsW-6x-yMS" firstAttribute="leading" secondItem="iC9-lt-RLq" secondAttribute="trailing" constant="10" id="qcU-sU-vqG"/>
+                            <constraint firstItem="eyh-O9-ZeA" firstAttribute="leading" secondItem="iC9-lt-RLq" secondAttribute="leading" id="rzh-sB-ZaN"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="bioLabel" destination="qIo-s0-wnq" id="zwa-7A-aYH"/>
+                            <outlet property="bornLabel" destination="KsW-6x-yMS" id="5To-33-I30"/>
+                            <outlet property="emailLabel" destination="eyh-O9-ZeA" id="qW9-Fz-QEz"/>
+                            <outlet property="nameLabel" destination="iC9-lt-RLq" id="eh6-vp-GqI"/>
+                            <outlet property="photoImageView" destination="vk3-4w-1Gu" id="9JG-yU-zj4"/>
+                        </connections>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Z4Y-c7-Xlv" secondAttribute="bottom" id="77f-c1-kZI"/>
+                    <constraint firstAttribute="trailing" secondItem="Z4Y-c7-Xlv" secondAttribute="trailing" id="EJQ-tI-1P3"/>
+                    <constraint firstItem="Z4Y-c7-Xlv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dE9-0p-ygT"/>
+                    <constraint firstItem="Z4Y-c7-Xlv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vzP-2i-Riu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="contactView" destination="Z4Y-c7-Xlv" id="jSY-6g-dH0"/>
+            </connections>
+            <point key="canvasLocation" x="14" y="0.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="avatar" width="32" height="32"/>
+    </resources>
+</document>
