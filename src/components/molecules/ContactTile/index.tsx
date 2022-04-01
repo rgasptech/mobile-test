@@ -4,8 +4,6 @@ import {Button, Gap, Picture} from '~components/atoms';
 import {spaces} from '~constants/spaces';
 import styles from './styles';
 
-const SCREEN_NAME = 'ContactTile';
-
 interface ContactTileProps {
   id: string;
   name: string;

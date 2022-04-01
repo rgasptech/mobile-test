@@ -1,18 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Button, DummyFlatList, Gap} from '~components/atoms';
 import {ContactTile, GapSeparator} from '~components/molecules';
 import {Canvas, SearchBox} from '~components/organisms';
 import {colors} from '~constants/colors';
 import {spaces} from '~constants/spaces';
+import {fetchContacts} from '~services';
+import {IContact, ReduxState} from '~types';
 import styles from './styles';
+import {keyExtractor} from './utilities';
 
 const ContactList = () => {
-  const keyExtractor = ({id}: typeof fetched[0]) => `${id}`;
+  const {contacts} = useSelector((state: ReduxState) => state);
 
-  const renderItem = ({item}: {item: typeof fetched[0]}) => (
-    <ContactTile name={item?.name} id={item?.id} uri={item?.photo} />
-  );
+  useEffect(() => {
+    // getContactsInfo();
+  }, []);
+
+  const getContactsInfo = async () => {
+    try {
+      const {is_success, data, message} = await fetchContacts();
+    } catch (error) {
+    } finally {
+    }
+  };
+
+  const isContactAvailable = !!contacts && !!contacts?.list?.length;
 
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
@@ -20,17 +34,21 @@ const ContactList = () => {
         <SearchBox />
         <Gap vertical={spaces.semiLarge} />
         <FlatList
-          style={styles.flatlist}
-          data={fetched}
+          data={contacts.list}
           keyExtractor={keyExtractor}
           ItemSeparatorComponent={GapSeparator}
           renderItem={renderItem}
+          style={styles.flatlist}
         />
       </DummyFlatList>
-      <Button style={styles.circleButton}></Button>
+      {isContactAvailable && <Button style={styles.circleButton}></Button>}
     </Canvas>
   );
 };
+
+const renderItem = ({item}: {item: IContact}) => (
+  <ContactTile name={item?.name} id={item?.name} uri={item?.photo} />
+);
 
 export default ContactList;
 
