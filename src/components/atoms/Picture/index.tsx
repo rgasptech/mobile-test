@@ -18,12 +18,14 @@ interface PictureProps extends FilteredImageProps {
   uri?: string | null;
   style?: StyleProp<ImageStyle>;
   placeholder?: number;
+  borderRadius?: number;
 }
 
 const Picture = ({
   uri,
   style,
   placeholder = Assets.images.UserPlaceholder,
+  borderRadius = 0,
   ...props
 }: PictureProps) => {
   const ready = useSharedValue(1);
@@ -44,10 +46,10 @@ const Picture = ({
   const onLoad = () => (ready.value = withTiming(0));
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[{borderRadius}, styles.container, style]}>
       <Animated.Image
         source={src}
-        style={[imageStyle, styles.image]}
+        style={[{borderRadius}, imageStyle, styles.image]}
         resizeMethod="resize"
         onLoad={onLoad}
         {...props}

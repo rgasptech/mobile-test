@@ -32,6 +32,7 @@ const DummyFlatList = forwardRef<any, PropsWithChildren<DummyFlatListProps>>(
         ListHeaderComponent={ListHeaderComponent}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles}
+        keyboardShouldPersistTaps="handled"
         ref={ref}
         {...props}
       />

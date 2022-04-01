@@ -21,8 +21,8 @@ const Phrase = ({
     <Text
       {...props}
       style={[
-        styles[preset],
         {textAlign: isCenter ? 'center' : undefined, color},
+        styles[preset],
         style,
       ]}>
       {children}

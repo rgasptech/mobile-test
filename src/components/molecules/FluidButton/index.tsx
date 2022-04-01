@@ -22,12 +22,11 @@ const FluidButton = ({
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: spaces.small,
+          minHeight: 48,
         },
       ]}
       {...props}>
-      <Phrase preset="action" color={colors.white}>
-        {children}
-      </Phrase>
+      <Phrase preset="action">{children}</Phrase>
     </Button>
   );
 };

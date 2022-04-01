@@ -1,5 +1,6 @@
 const colors = {
   black100: '#151515',
+  black90: '#3D3C3C',
   primary: '#2AC5A0',
   secondary: '#0080A8',
   white: '#FFF',
