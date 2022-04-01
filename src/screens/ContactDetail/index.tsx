@@ -1,11 +1,7 @@
 import React from 'react';
 import {Canvas} from '~components/organisms';
 
-const SCREEN_NAME = 'ContactDetail';
-
-interface ContactDetailProps {}
-
-const ContactDetail = ({}: ContactDetailProps) => {
+const ContactDetail = () => {
   return <Canvas></Canvas>;
 };
 

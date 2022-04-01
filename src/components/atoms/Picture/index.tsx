@@ -10,7 +10,7 @@ import styles from './styles';
 
 import {ImageProps, ImageStyle, StyleProp} from 'react-native';
 import Assets from '~assets';
-import {colors} from '~constants/colors';
+import colors from '~constants/colors';
 
 type FilteredImageProps = Omit<ImageProps, 'source'>;
 
@@ -47,7 +47,7 @@ const Picture = ({
     <View style={[styles.container, style]}>
       <Animated.Image
         source={src}
-        style={[imageStyle, style]}
+        style={[imageStyle, styles.image]}
         resizeMethod="resize"
         onLoad={onLoad}
         {...props}

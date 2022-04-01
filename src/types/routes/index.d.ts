@@ -1,6 +1,7 @@
 type RootStackParamList = {
-  ContactList: undefined;
   ContactDetail: undefined;
+  ContactForm: undefined;
+  ContactList: undefined;
 };
 
 export type {RootStackParamList};

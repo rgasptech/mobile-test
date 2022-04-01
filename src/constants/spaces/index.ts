@@ -14,4 +14,4 @@ const spaces = {
   xxxlarge: converter(56),
 };
 
-export {spaces};
+export default spaces;

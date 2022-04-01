@@ -1,22 +1,25 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Button, Gap, Phrase} from '~components/atoms';
-import {colors} from '~constants/colors';
-import {spaces} from '~constants/spaces';
+import colors from '~constants/colors';
+import spaces from '~constants/spaces';
 import styles from './styles';
 
-interface EmptyPlaceholderProps {}
+interface EmptyPlaceholderProps {
+  onPress?(): void;
+}
 
-const EmptyPlaceholder = ({}: EmptyPlaceholderProps) => {
+const EmptyPlaceholder = ({onPress}: EmptyPlaceholderProps) => {
   return (
     <View style={styles.container}>
       <Phrase isCenter preset="title">
-        Contact Empty
+        Everyone is on a party!
       </Phrase>
       <Gap vertical={spaces.small} />
+      <Phrase isCenter>No one is here,</Phrase>
       <Phrase isCenter>Looks like you do not have any contact.</Phrase>
       <Gap vertical={spaces.semiLarge} />
-      <Button style={styles.button}>
+      <Button style={styles.button} onPress={onPress}>
         <Phrase color={colors.white} preset="action">
           Add Contact
         </Phrase>

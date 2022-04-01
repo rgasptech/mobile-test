@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {Button, Gap, Picture} from '~components/atoms';
-import {spaces} from '~constants/spaces';
+import spaces from '~constants/spaces';
 import styles from './styles';
 
 interface ContactTileProps {

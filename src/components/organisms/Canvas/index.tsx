@@ -2,7 +2,7 @@ import React, {PropsWithChildren} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {CustomStatusBar} from '~components/atoms';
-import {colors} from '~constants/colors';
+import colors from '~constants/colors';
 import styles from './styles';
 
 interface CanvasProps {

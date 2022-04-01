@@ -8,4 +8,4 @@ const colors = {
   white100: '#F8FAFC',
 };
 
-export {colors};
+export default colors;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TextProps} from 'react-native';
-import {colors} from '~constants/colors';
+import colors from '~constants/colors';
 import styles from './styles';
 
 interface PhraseProps extends TextProps {

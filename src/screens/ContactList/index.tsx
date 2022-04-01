@@ -5,9 +5,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, DummyFlatList, Gap} from '~components/atoms';
 import {ContactTile, GapSeparator} from '~components/molecules';
 import {Canvas, EmptyPlaceholder, SearchBox} from '~components/organisms';
-import {colors} from '~constants/colors';
+import colors from '~constants/colors';
 import {skeleton} from '~constants/skeletons';
-import {spaces} from '~constants/spaces';
+import spaces from '~constants/spaces';
+import {useNavigate} from '~hooks';
 import {dispatchAddContacts} from '~redux/actions';
 import {fetchContacts} from '~services';
 import {IContact, ReduxState} from '~types';
@@ -16,6 +17,7 @@ import {keyExtractor} from './utilities';
 
 const ContactList = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigate();
   const {contacts} = useSelector((state: ReduxState) => state);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +65,9 @@ const ContactList = () => {
               renderItem={renderItem}
             />
           ) : (
-            <EmptyPlaceholder />
+            <EmptyPlaceholder
+              onPress={() => navigation.navigate('ContactForm')}
+            />
           )}
         </SkeletonContent>
       </DummyFlatList>
