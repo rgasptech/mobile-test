@@ -9,7 +9,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 const Root = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ContactDetail">
+      <Stack.Navigator
+        initialRouteName="ContactList"
+        screenOptions={{headerShown: false}}>
         <Stack.Screen name="ContactDetail" component={ContactDetail} />
         <Stack.Screen name="ContactList" component={ContactList} />
       </Stack.Navigator>
