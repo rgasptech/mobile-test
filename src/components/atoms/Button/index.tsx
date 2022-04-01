@@ -3,7 +3,6 @@ import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
 const Button = ({
   children,
-  onPress,
   ...props
 }: PropsWithChildren<TouchableOpacityProps>) => {
   return (
