@@ -1,45 +1,71 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
-import {useSelector} from 'react-redux';
+import SkeletonContent from 'react-native-skeleton-content-nonexpo';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, DummyFlatList, Gap} from '~components/atoms';
 import {ContactTile, GapSeparator} from '~components/molecules';
-import {Canvas, SearchBox} from '~components/organisms';
+import {Canvas, EmptyPlaceholder, SearchBox} from '~components/organisms';
 import {colors} from '~constants/colors';
+import {skeleton} from '~constants/skeletons';
 import {spaces} from '~constants/spaces';
+import {dispatchAddContacts} from '~redux/actions';
 import {fetchContacts} from '~services';
 import {IContact, ReduxState} from '~types';
 import styles from './styles';
 import {keyExtractor} from './utilities';
 
 const ContactList = () => {
+  const dispatch = useDispatch();
   const {contacts} = useSelector((state: ReduxState) => state);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // getContactsInfo();
   }, []);
 
+  const isContactAvailable = !!contacts && !!contacts?.list?.length;
+
   const getContactsInfo = async () => {
+    if (isContactAvailable) {
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
     try {
       const {is_success, data, message} = await fetchContacts();
+      if (!is_success) {
+        // snackbar
+        return;
+      }
+      dispatch(dispatchAddContacts(data));
     } catch (error) {
+      // snackbar
     } finally {
+      setIsLoading(false);
     }
   };
-
-  const isContactAvailable = !!contacts && !!contacts?.list?.length;
 
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
       <DummyFlatList>
-        <SearchBox />
+        <SearchBox editable={isContactAvailable} />
         <Gap vertical={spaces.semiLarge} />
-        <FlatList
-          data={contacts.list}
-          keyExtractor={keyExtractor}
-          ItemSeparatorComponent={GapSeparator}
-          renderItem={renderItem}
-          style={styles.flatlist}
-        />
+        <SkeletonContent
+          containerStyle={styles.skeleton}
+          isLoading={false}
+          layout={skeleton.contactList}>
+          {isContactAvailable ? (
+            <FlatList
+              data={contacts.list}
+              keyExtractor={keyExtractor}
+              ItemSeparatorComponent={GapSeparator}
+              renderItem={renderItem}
+            />
+          ) : (
+            <EmptyPlaceholder />
+          )}
+        </SkeletonContent>
       </DummyFlatList>
       {isContactAvailable && <Button style={styles.circleButton}></Button>}
     </Canvas>

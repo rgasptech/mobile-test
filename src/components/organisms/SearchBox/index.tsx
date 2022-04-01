@@ -7,16 +7,21 @@ import {spaces} from '~constants/spaces';
 import {textSizes} from '~constants/textSizes';
 import styles from './styles';
 
-interface SearchBoxProps {}
+interface SearchBoxProps {
+  editable?: boolean;
+}
 
-const SearchBox = ({}: SearchBoxProps) => {
+const SearchBox = ({editable = true}: SearchBoxProps) => {
   return (
     <View style={styles.container}>
-      <Phrase preset="title">MailBook</Phrase>
+      <Phrase color={colors.white} preset="title">
+        MailBook
+      </Phrase>
       <Gap vertical={spaces.medium} />
       <View>
         <View style={styles.inputContainer}>
           <TextInput
+            editable={editable}
             placeholder="Search by name"
             placeholderTextColor={colors.white90}
             style={[

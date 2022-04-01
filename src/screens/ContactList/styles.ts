@@ -17,9 +17,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  flatlist: {
-    paddingHorizontal: spaces.semiLarge,
-  },
+
+  skeleton: {flex: 1, paddingHorizontal: spaces.semiLarge},
 });
 
 export default styles;

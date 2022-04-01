@@ -3,13 +3,15 @@ import {colors} from '~constants/colors';
 import {textSizes} from '~constants/textSizes';
 
 const styles = StyleSheet.create({
+  action: {
+    fontWeight: 'bold',
+    fontSize: textSizes['16'],
+  },
   regular: {
-    color: colors.black100,
     fontSize: textSizes['14'],
   },
   title: {
     fontWeight: 'bold',
-    color: colors.white,
     fontSize: textSizes['24'],
   },
 });
