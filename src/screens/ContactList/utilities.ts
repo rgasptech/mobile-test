@@ -1,5 +1,5 @@
 import {IContact} from '~types';
 
-const keyExtractor = ({name}: IContact) => `${name}`;
+const keyExtractor = ({id}: IContact) => `${id}`;
 
 export {keyExtractor};

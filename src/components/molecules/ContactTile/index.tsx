@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {Button, Gap, Picture} from '~components/atoms';
 import spaces from '~constants/spaces';
+import {diagonalDp} from '~helpers';
 import styles from './styles';
 
 interface ContactTileProps {
@@ -15,7 +16,7 @@ const ContactTile = ({name, uri, id, onPress}: ContactTileProps) => {
   const onTap = () => onPress(id);
   return (
     <Button style={styles.container} onPress={onTap}>
-      <Picture uri={uri} style={styles.image} />
+      <Picture uri={uri} style={styles.image} borderRadius={diagonalDp(48)} />
       <Gap horizontal={spaces.medium} />
       <View style={styles.nameContainer}>
         <Text numberOfLines={2}>{name}</Text>

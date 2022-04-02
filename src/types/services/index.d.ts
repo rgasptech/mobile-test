@@ -7,9 +7,9 @@ interface FetchResponse {
 interface IContact {
   name: string;
   email: string;
-  born: string;
-  bio: string;
-  photo: string;
+  born: string | undefined;
+  bio: string | undefined;
+  photo: string | undefined;
   id: string;
 }
 

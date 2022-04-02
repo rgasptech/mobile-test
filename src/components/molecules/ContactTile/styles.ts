@@ -9,11 +9,9 @@ const styles = StyleSheet.create({
   image: {
     width: PROFILE_SIZE,
     height: PROFILE_SIZE,
-    borderRadius: PROFILE_SIZE,
   },
   imageContainer: {
     width: PROFILE_SIZE,
-    borderRadius: PROFILE_SIZE,
     aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',

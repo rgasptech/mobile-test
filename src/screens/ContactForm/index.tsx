@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {KeyboardAvoidingView, View} from 'react-native';
 import {
   ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {useDispatch} from 'react-redux';
 import Assets from '~assets';
 import {Button, DummyFlatList, Gap, Picture} from '~components/atoms';
 import {FluidButton, Header} from '~components/molecules';
@@ -12,20 +15,22 @@ import {Canvas} from '~components/organisms';
 import PhraseInput from '~components/organisms/PhraseInput';
 import spaces from '~constants/spaces';
 import {diagonalDp, isIos} from '~helpers';
-import {useNavigate} from '~hooks';
+import {useContactDetail, useNavigate} from '~hooks';
+import {
+  dispatchAddContact,
+  dispatchDeleteContact,
+  dispatchUpdateContact,
+} from '~redux/actions';
 import {IContact, RootStackParamList} from '~types';
 import styles from './styles';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {useDispatch} from 'react-redux';
-import {dispatchAddContact, dispatchDeleteContact} from '~redux/actions';
-import {RouteProp, useRoute} from '@react-navigation/native';
 
 const ContactForm = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ContactForm'>>();
+  const {id} = route?.params || {};
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
-
-  const {id} = route?.params || {};
+  const userDetail = useContactDetail(id);
 
   const {
     control,
@@ -46,15 +51,19 @@ const ContactForm = () => {
 
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
-  const onAdd = (data: IContact) => {
-    dispatch(dispatchAddContact({...data, id: `${new Date().getTime()}`}));
-    navigation.goBack();
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      editSetter();
+    }, 400);
+  }, [id]);
 
-  const onDelteConfirm = () => {
+  const editSetter = () => {
     if (!id) return;
-    navigation.pop(2);
-    dispatch(dispatchDeleteContact(id));
+    setValue('bio', userDetail?.bio);
+    setValue('born', userDetail?.born, {shouldValidate: true});
+    setValue('email', userDetail?.email || '');
+    setValue('name', userDetail?.name || '');
+    setValue('photo', userDetail?.photo, {shouldValidate: true});
   };
 
   const handleConfirm = (date: Date) => {
@@ -70,6 +79,19 @@ const ContactForm = () => {
   };
 
   const hideDatePicker = () => setIsDatePickerVisible(false);
+
+  const onSubmit = (data: IContact) => {
+    !!id
+      ? dispatch(dispatchUpdateContact({...data, id}))
+      : dispatch(dispatchAddContact({...data, id: `${new Date().getTime()}`}));
+    navigation.goBack();
+  };
+
+  const onDelteConfirm = () => {
+    if (!id) return;
+    navigation.pop(2);
+    dispatch(dispatchDeleteContact(id));
+  };
 
   const onPickPhoto = () =>
     launchImageLibrary({mediaType: 'photo'}, (image: ImagePickerResponse) => {
@@ -114,6 +136,7 @@ const ContactForm = () => {
                 autoCapitalize="words"
                 label="Name"
                 placeholder="What do we call it?"
+                maxLength={40}
                 onChangeText={onChange}
                 value={value}
                 error={!!errors.name?.message}
@@ -144,6 +167,7 @@ const ContactForm = () => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
+                maxLength={50}
                 value={value}
                 error={!!errors.email?.message}
                 errorMessage={errors.email?.message}
@@ -179,7 +203,7 @@ const ContactForm = () => {
           <Gap vertical={spaces.semiLarge} />
         </DummyFlatList>
       </KeyboardAvoidingView>
-      <FluidButton onPress={handleSubmit(onAdd)} style={styles.floatButton}>
+      <FluidButton onPress={handleSubmit(onSubmit)} style={styles.floatButton}>
         {!!id ? 'Update Contact' : 'Save Contact'}
       </FluidButton>
       <DateTimePickerModal

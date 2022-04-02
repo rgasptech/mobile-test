@@ -21,6 +21,14 @@ const contactsReducer = (
         list: state.list.filter(contact => contact.id !== action?.payload),
       };
 
+    case 'UpdateContact':
+      const updatedList = [...state.list];
+      const targetIndex = updatedList.findIndex(
+        contact => contact.id === action?.payload?.id,
+      );
+      Object.assign(updatedList[targetIndex], action?.payload);
+      return {...state, list: updatedList};
+
     default:
       return state;
   }
