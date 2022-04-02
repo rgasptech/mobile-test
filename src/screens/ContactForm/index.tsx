@@ -197,8 +197,7 @@ const ContactForm = () => {
       <FluidButton
         onPress={handleSubmit(onSubmit)}
         style={styles.floatButton}
-        // disabled={isValid}
-      >
+        disabled={!isValid}>
         {buttonLabel}
       </FluidButton>
       <DateTimePickerModal

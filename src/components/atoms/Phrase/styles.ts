@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
     fontSize: textSizes['12'],
     color: colors.danger,
   },
+  disabled: {
+    color: colors.white70,
+    fontWeight: 'bold',
+    fontSize: textSizes['16'],
+  },
   subheadingBold: {
     fontWeight: 'bold',
     fontSize: textSizes['16'],
