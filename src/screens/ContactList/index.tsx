@@ -23,7 +23,7 @@ const ContactList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // getContactsInfo();
+    getContactsInfo();
   }, []);
 
   const isContactAvailable = !!contacts && !!contacts?.list?.length;
@@ -58,7 +58,7 @@ const ContactList = () => {
         <Gap vertical={spaces.semiLarge} />
         <SkeletonContent
           containerStyle={styles.skeleton}
-          isLoading={false}
+          isLoading={isLoading}
           layout={skeleton.contactList}>
           {isContactAvailable ? (
             <FlatList
