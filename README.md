@@ -70,6 +70,26 @@ yarn install && npx pod-install
 
 [Run](https://reactnative.dev/docs/running-on-device) the application on your device or use an [iOS simulator](https://reactnative.dev/docs/running-on-simulator-ios)
 
+### Generate Android Debug APK <a name="installation"></a>
+
+Developer who runs in a Windows operating system could use this command
+
+```
+yarn assembleDebug
+```
+
+For Mac OS simply run
+
+```
+yarn assembleDebugIos
+```
+
+The generated app would be stored in
+
+```
+mobile-test/android/app/build/outputs/apk/debug/app-debug.apk
+```
+
 <!-- DOWNLOAD -->
 
 ## Download <a name="download"></a>
