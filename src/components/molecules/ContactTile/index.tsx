@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import Animated, {FadeInDown} from 'react-native-reanimated';
 import {Button, Gap, Picture} from '~components/atoms';
 import spaces from '~constants/spaces';
 import {diagonalDp} from '~helpers';
@@ -10,18 +11,21 @@ interface ContactTileProps {
   name: string;
   uri?: string;
   onPress(id: string): void;
+  index: number;
 }
 
-const ContactTile = ({name, uri, id, onPress}: ContactTileProps) => {
+const ContactTile = ({name, uri, id, onPress, index}: ContactTileProps) => {
   const onTap = () => onPress(id);
   return (
-    <Button style={styles.container} onPress={onTap}>
-      <Picture uri={uri} style={styles.image} borderRadius={diagonalDp(48)} />
-      <Gap horizontal={spaces.medium} />
-      <View style={styles.nameContainer}>
-        <Text numberOfLines={2}>{name}</Text>
-      </View>
-    </Button>
+    <Animated.View entering={FadeInDown.delay(index * 300)}>
+      <Button style={styles.container} onPress={onTap}>
+        <Picture uri={uri} style={styles.image} borderRadius={diagonalDp(48)} />
+        <Gap horizontal={spaces.medium} />
+        <View style={styles.nameContainer}>
+          <Text numberOfLines={2}>{name}</Text>
+        </View>
+      </Button>
+    </Animated.View>
   );
 };
 

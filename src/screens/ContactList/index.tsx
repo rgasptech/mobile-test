@@ -25,7 +25,7 @@ const ContactList = () => {
 
   useEffect(() => {
     getContactsInfo();
-  }, []);
+  }, [contacts.list]);
 
   const isContactAvailable = !!contacts && !!contacts?.list?.length;
 
@@ -35,19 +35,12 @@ const ContactList = () => {
       return;
     }
     setIsLoading(true);
-    try {
-      const {is_success, data, message} = await fetchContacts();
-      if (!is_success) {
-        // snackbar
-        return;
-      }
-      dispatch(dispatchAddContacts(data));
-    } catch (error) {
-      // snackbar
-    } finally {
-      setIsLoading(false);
-    }
+    const {is_success, data} = await fetchContacts();
+    if (is_success) dispatch(dispatchAddContacts(data));
+    setIsLoading(false);
   };
+
+  const onAddContact = () => navigation.navigate('ContactForm');
 
   const onContactPress = (id: string) =>
     navigation.navigate('ContactDetail', {id});
@@ -69,16 +62,12 @@ const ContactList = () => {
               renderItem={renderItem(onContactPress)}
             />
           ) : (
-            <EmptyPlaceholder
-              onPress={() => navigation.navigate('ContactForm')}
-            />
+            <EmptyPlaceholder onPress={onAddContact} />
           )}
         </SkeletonContent>
       </DummyFlatList>
       {isContactAvailable && (
-        <Button
-          onPress={() => navigation.navigate('ContactForm')}
-          style={styles.circleButton}>
+        <Button onPress={onAddContact} style={styles.circleButton}>
           <Assets.svg.Plus />
         </Button>
       )}
@@ -88,89 +77,15 @@ const ContactList = () => {
 
 const renderItem =
   (onPress: (id: string) => void) =>
-  ({item}: {item: IContact}) =>
+  ({item, index}: {item: IContact; index: number}) =>
     (
       <ContactTile
         name={item?.name}
         id={item?.id}
         uri={item?.photo}
         onPress={onPress}
+        index={index}
       />
     );
 
 export default ContactList;
-
-const fetched = [
-  {
-    name: 'Name Person1',
-    id: '2rxqwxsd',
-    email: 'person1@email.com',
-    born: '01/01/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo1.jpg',
-  },
-  {
-    name: 'Name Person2',
-    id: 'qwtasdf',
-    email: 'person2@email.com',
-    born: '02/02/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo2.jpg',
-  },
-  {
-    name: 'Name Person3',
-    id: 'rq2rsfd',
-    email: 'person3@email.com',
-    born: '01/03/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo3.jpg',
-  },
-  {
-    name: 'Name Person4',
-    id: 'r2qsdfasdf',
-    email: 'person4@email.com',
-    born: '01/04/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo4.jpg',
-  },
-  {
-    name: 'Name Person5',
-    id: 'fq3tafsd',
-    email: 'person5@email.com',
-    born: '01/05/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo5.jpg',
-  },
-  {
-    name: 'Name Person6',
-    id: 'fastqwrqwe',
-    email: 'person6@email.com',
-    born: '01/06/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo6.jpg',
-  },
-  {
-    name: 'Name Person7',
-    id: 'fqrasdfaw4',
-    email: 'person7@email.com',
-    born: '02/07/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo7.jpg',
-  },
-  {
-    name: 'Name Person8',
-    id: '25safadr',
-    email: 'person8@email.com',
-    born: '01/08/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo8.jpg',
-  },
-  {
-    name: 'Name Person9',
-    id: 'q2345dsfasf',
-    email: 'person9@email.com',
-    born: '01/99/2015',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis, vehicula semper ante tristique. Phasellus quis ex sit amet nulla sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet imperdiet enim ac dictum.',
-    photo: 'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/photo9.jpg',
-  },
-];
