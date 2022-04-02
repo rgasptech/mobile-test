@@ -8,11 +8,13 @@ interface ContactTileProps {
   id: string;
   name: string;
   uri?: string;
+  onPress(id: string): void;
 }
 
-const ContactTile = ({name, uri}: ContactTileProps) => {
+const ContactTile = ({name, uri, id, onPress}: ContactTileProps) => {
+  const onTap = () => onPress(id);
   return (
-    <Button style={styles.container}>
+    <Button style={styles.container} onPress={onTap}>
       <Picture uri={uri} style={styles.image} />
       <Gap horizontal={spaces.medium} />
       <View style={styles.nameContainer}>

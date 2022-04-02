@@ -48,6 +48,9 @@ const ContactList = () => {
     }
   };
 
+  const onContactPress = (id: string) =>
+    navigation.navigate('ContactDetail', {id});
+
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
       <DummyFlatList>
@@ -62,7 +65,7 @@ const ContactList = () => {
               data={contacts.list}
               keyExtractor={keyExtractor}
               ItemSeparatorComponent={GapSeparator}
-              renderItem={renderItem}
+              renderItem={renderItem(onContactPress)}
             />
           ) : (
             <EmptyPlaceholder
@@ -71,14 +74,26 @@ const ContactList = () => {
           )}
         </SkeletonContent>
       </DummyFlatList>
-      {isContactAvailable && <Button style={styles.circleButton}></Button>}
+      {isContactAvailable && (
+        <Button
+          onPress={() => navigation.navigate('ContactForm')}
+          style={styles.circleButton}></Button>
+      )}
     </Canvas>
   );
 };
 
-const renderItem = ({item}: {item: IContact}) => (
-  <ContactTile name={item?.name} id={item?.name} uri={item?.photo} />
-);
+const renderItem =
+  (onPress: (id: string) => void) =>
+  ({item}: {item: IContact}) =>
+    (
+      <ContactTile
+        name={item?.name}
+        id={item?.id}
+        uri={item?.photo}
+        onPress={onPress}
+      />
+    );
 
 export default ContactList;
 

@@ -10,8 +10,12 @@ const contactsReducer = (
 ) => {
   switch (action.type) {
     case 'AddBulk':
-      if (typeof action?.payload === 'object') return state;
-      return {...state, list: action?.payload};
+      if (Array.isArray(action?.payload))
+        return {...state, list: action?.payload};
+
+    case 'AddContact':
+      if (!Array.isArray(action?.payload))
+        return {...state, list: [...state?.list, action?.payload]};
 
     default:
       return state;

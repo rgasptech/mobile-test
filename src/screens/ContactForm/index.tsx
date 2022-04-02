@@ -16,8 +16,11 @@ import {useNavigate} from '~hooks';
 import {IContact} from '~types';
 import styles from './styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {useDispatch} from 'react-redux';
+import {dispatchAddContact} from '~redux/actions';
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigate();
 
   const {
@@ -40,9 +43,8 @@ const ContactForm = () => {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   const onAdd = (data: IContact) => {
-    navigation.navigate('ContactDetail');
-    return;
-    console.log(data);
+    dispatch(dispatchAddContact({...data, id: `${new Date().getTime()}`}));
+    navigation.goBack();
   };
 
   const handleConfirm = (date: Date) => {

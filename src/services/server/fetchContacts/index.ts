@@ -8,9 +8,10 @@ const fetchContacts = () => {
         'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/content.json',
       );
       if (!!data && Array.isArray(data)) {
+        const contacts = data?.map(item => ({...item, id: item?.name}));
         resolved({
           message: 'Data retrieved successfuly',
-          data,
+          data: contacts,
           is_success: true,
         });
       }

@@ -1,5 +1,5 @@
 type RootStackParamList = {
-  ContactDetail: undefined;
+  ContactDetail: {id: string};
   ContactForm: undefined;
   ContactList: undefined;
 };

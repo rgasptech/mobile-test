@@ -7,4 +7,11 @@ const dispatchAddContacts = (
   payload,
 });
 
-export {dispatchAddContacts};
+const dispatchAddContact = (
+  payload: IContact,
+): {type: ContactActionTypes; payload: IContact} => ({
+  type: 'AddContact',
+  payload,
+});
+
+export {dispatchAddContacts, dispatchAddContact};

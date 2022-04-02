@@ -7,6 +7,6 @@ interface IContactReducer {
 
 type ReduxState = ReturnType<typeof rootReducer>;
 
-type ContactActionTypes = 'AddBulk';
+type ContactActionTypes = 'AddBulk' | 'AddContact';
 
 export {ReduxState, ContactActionTypes, IContactReducer};

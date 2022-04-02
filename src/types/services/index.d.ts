@@ -10,6 +10,7 @@ interface IContact {
   born: string;
   bio: string;
   photo: string;
+  id: string;
 }
 
 export type {FetchResponse, IContact};
