@@ -8,18 +8,21 @@ import styles from './styles';
 
 interface SearchBoxProps {
   editable?: boolean;
+  onChange(keyword: string): void;
 }
 
-const SearchBox = ({editable = true}: SearchBoxProps) => {
-  return (
-    <View style={styles.container}>
-      <Phrase color={colors.white} preset="title">
-        MailBook
-      </Phrase>
-      <Gap vertical={spaces.medium} />
-      <Field placeholder="Search by name" editable={editable} />
-    </View>
-  );
-};
+const SearchBox = ({editable = true, onChange}: SearchBoxProps) => (
+  <View style={styles.container}>
+    <Phrase color={colors.white} preset="title">
+      MailBook
+    </Phrase>
+    <Gap vertical={spaces.medium} />
+    <Field
+      placeholder="Search by name"
+      editable={editable}
+      onChangeText={onChange}
+    />
+  </View>
+);
 
 export default SearchBox;

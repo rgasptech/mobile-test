@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, View} from 'react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import {Button, Gap, Picture} from '~components/atoms';
@@ -17,7 +17,7 @@ interface ContactTileProps {
 const ContactTile = ({name, uri, id, onPress, index}: ContactTileProps) => {
   const onTap = () => onPress(id);
   return (
-    <Animated.View entering={FadeInDown.delay(index * 300)}>
+    <Animated.View entering={FadeInDown.delay(index * 100)}>
       <Button style={styles.container} onPress={onTap}>
         <Picture uri={uri} style={styles.image} borderRadius={diagonalDp(48)} />
         <Gap horizontal={spaces.medium} />
@@ -29,4 +29,4 @@ const ContactTile = ({name, uri, id, onPress, index}: ContactTileProps) => {
   );
 };
 
-export default ContactTile;
+export default memo(ContactTile);

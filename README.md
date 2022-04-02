@@ -23,6 +23,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Generate Android Debug APK](#generate)
 - [Download](#download)
 
 <!-- BACKGROUND -->
@@ -70,7 +71,7 @@ yarn install && npx pod-install
 
 [Run](https://reactnative.dev/docs/running-on-device) the application on your device or use an [iOS simulator](https://reactnative.dev/docs/running-on-simulator-ios)
 
-### Generate Android Debug APK <a name="installation"></a>
+### Generate Android Debug APK <a name="generate"></a>
 
 Developer who runs in a Windows operating system could use this command
 

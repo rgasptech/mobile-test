@@ -1,3 +1,5 @@
+import {IContact} from '~types';
+
 const emailRegex =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
 
@@ -22,6 +24,17 @@ const emailValidate = (str: number | string | undefined) =>
 
 /**
  *
+ * @param list contacts
+ * @param keyword name input
+ * @returns contacts that the name property contain the keyword
+ */
+const searchContact = (list: IContact[], keyword: string) =>
+  list.filter(contact =>
+    contact.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()),
+  );
+
+/**
+ *
  * @param array an array as the source.
  * @param payload an object or value that wanted to be injected inside array.
  * @param indexFinder the index of the element that wanted to be updated. Gives array source as the first param
@@ -37,4 +50,4 @@ const updateElement = <T>(
   return updatedList;
 };
 
-export {dateFormatter, emailValidate, updateElement};
+export {dateFormatter, emailValidate, updateElement, searchContact};

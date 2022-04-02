@@ -6,17 +6,19 @@ import styles from './styles';
 
 interface EmptyPlaceholderProps {
   onPress?(): void;
+  title?: string;
+  desc?: string;
 }
 
-const EmptyPlaceholder = ({onPress}: EmptyPlaceholderProps) => {
+const EmptyPlaceholder = ({onPress, title, desc}: EmptyPlaceholderProps) => {
   return (
     <View style={styles.container}>
       <Phrase isCenter preset="title">
-        Everyone is on a party!
+        {title}
       </Phrase>
       <Gap vertical={spaces.small} />
       <Phrase isCenter>No one is here,</Phrase>
-      <Phrase isCenter>Looks like you do not have any contact.</Phrase>
+      <Phrase isCenter>{desc}</Phrase>
       <Gap vertical={spaces.semiLarge} />
       <Button style={styles.button} onPress={onPress}>
         <Phrase preset="action">Add Contact</Phrase>

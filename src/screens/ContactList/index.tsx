@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {FlatList} from 'react-native';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {useDispatch, useSelector} from 'react-redux';
-import Assets from '~assets';
-import {Button, DummyFlatList, Gap} from '~components/atoms';
+import {DummyFlatList, Gap} from '~components/atoms';
 import {ContactTile, GapSeparator} from '~components/molecules';
+import FloatRounded from '~components/molecules/FloatRounded';
 import {Canvas, EmptyPlaceholder, SearchBox} from '~components/organisms';
 import colors from '~constants/colors';
 import {skeleton} from '~constants/skeletons';
 import spaces from '~constants/spaces';
+import {searchContact} from '~helpers';
 import {useNavigate} from '~hooks';
 import {dispatchContacts} from '~redux/actions';
 import {fetchContacts} from '~services';
@@ -22,12 +23,23 @@ const ContactList = () => {
   const {contacts} = useSelector((state: ReduxState) => state);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [keyword, setKeyword] = useState('');
+
+  const contactList = useMemo(
+    () => searchContact(contacts.list, keyword),
+    [contacts.list, keyword],
+  );
 
   useEffect(() => {
     getContactsInfo();
   }, [contacts.list]);
 
   const isContactAvailable = !!contacts && !!contacts?.list?.length;
+
+  const isSearchAvailable = !!keyword && contactList.length !== 0;
+
+  const isShowFloatButton =
+    (!keyword && isContactAvailable) || isSearchAvailable;
 
   const getContactsInfo = async () => {
     if (isContactAvailable) {
@@ -42,13 +54,15 @@ const ContactList = () => {
 
   const onAddContact = () => navigation.navigate('ContactForm');
 
-  const onContactPress = (id: string) =>
-    navigation.navigate('ContactDetail', {id});
+  const onContactPress = useCallback(
+    (id: string) => navigation.navigate('ContactDetail', {id}),
+    [],
+  );
 
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
       <DummyFlatList>
-        <SearchBox editable={isContactAvailable} />
+        <SearchBox editable={isContactAvailable} onChange={setKeyword} />
         <Gap vertical={spaces.semiLarge} />
         <SkeletonContent
           containerStyle={styles.skeleton}
@@ -56,21 +70,28 @@ const ContactList = () => {
           layout={skeleton.contactList}>
           {isContactAvailable ? (
             <FlatList
-              data={contacts.list}
+              data={contactList}
               keyExtractor={keyExtractor}
               ItemSeparatorComponent={GapSeparator}
               renderItem={renderItem(onContactPress)}
             />
           ) : (
-            <EmptyPlaceholder onPress={onAddContact} />
+            <EmptyPlaceholder
+              desc="Looks like you do not have any contact."
+              title="Everyone is on a party!"
+              onPress={onAddContact}
+            />
+          )}
+          {!isSearchAvailable && (
+            <EmptyPlaceholder
+              desc="You could try different name or add a new one."
+              title="None matched"
+              onPress={onAddContact}
+            />
           )}
         </SkeletonContent>
       </DummyFlatList>
-      {isContactAvailable && (
-        <Button onPress={onAddContact} style={styles.circleButton}>
-          <Assets.svg.Plus />
-        </Button>
-      )}
+      {isShowFloatButton && <FloatRounded onPress={onAddContact} />}
     </Canvas>
   );
 };
