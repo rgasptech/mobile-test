@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import Assets from '~assets';
 import {Button, DummyFlatList, Gap, Phrase, Picture} from '~components/atoms';
 import {Canvas} from '~components/organisms';
 import colors from '~constants/colors';
@@ -60,7 +61,11 @@ const ContactDetail = () => {
           bottom: spaces.xlarge,
           right: spaces.xlarge,
           minHeight: 48,
+          flexDirection: 'row',
+          alignItems: 'center',
         }}>
+        <Assets.svg.Pencil />
+        <Gap horizontal={spaces.semiMedium} />
         <Phrase preset="action" color={colors.white}>
           Edit Contact
         </Phrase>

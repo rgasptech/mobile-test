@@ -7,6 +7,8 @@ const styles = StyleSheet.create({
   button: {
     width: diagonalDp(48),
     aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   container: {

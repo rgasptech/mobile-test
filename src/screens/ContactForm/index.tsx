@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {KeyboardAvoidingView, View} from 'react-native';
+import {
+  ImagePickerResponse,
+  launchImageLibrary,
+} from 'react-native-image-picker';
+import Assets from '~assets';
 import {Button, DummyFlatList, Gap, Picture} from '~components/atoms';
 import {FluidButton, Header} from '~components/molecules';
 import {Canvas} from '~components/organisms';
@@ -10,10 +15,7 @@ import {diagonalDp, isIos} from '~helpers';
 import {useNavigate} from '~hooks';
 import {IContact} from '~types';
 import styles from './styles';
-import {
-  launchImageLibrary,
-  ImagePickerResponse,
-} from 'react-native-image-picker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const ContactForm = () => {
   const navigation = useNavigate();
@@ -35,9 +37,27 @@ const ContactForm = () => {
     mode: 'onChange',
   });
 
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+
   const onAdd = (data: IContact) => {
+    navigation.navigate('ContactDetail');
+    return;
     console.log(data);
   };
+
+  const handleConfirm = (date: Date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const dayFormatted = day < 10 ? `0${day}` : day;
+    const monthFormatted = month < 10 ? `0${month}` : month;
+    setValue('born', `${dayFormatted}/${monthFormatted}/${year}`, {
+      shouldValidate: true,
+    });
+    setIsDatePickerVisible(false);
+  };
+
+  const hideDatePicker = () => setIsDatePickerVisible(false);
 
   const onPickPhoto = () =>
     launchImageLibrary({mediaType: 'photo'}, (image: ImagePickerResponse) => {
@@ -45,6 +65,8 @@ const ContactForm = () => {
       const {uri} = !!image?.assets ? image?.assets[0] : {uri: ''};
       setValue('photo', uri || '', {shouldValidate: true});
     });
+
+  const showDatePicker = () => setIsDatePickerVisible(true);
 
   return (
     <Canvas>
@@ -60,7 +82,9 @@ const ContactForm = () => {
                 borderRadius={diagonalDp(128)}
                 uri={getValues('photo')}
               />
-              <Button style={styles.photoPicker} onPress={onPickPhoto}></Button>
+              <Button style={styles.photoPicker} onPress={onPickPhoto}>
+                <Assets.svg.Camera size={spaces.semiLarge} />
+              </Button>
             </View>
           </View>
           <Gap vertical={spaces.xlarge} />
@@ -116,7 +140,8 @@ const ContactForm = () => {
             label="Date of Birth"
             placeholder="What is the age?"
             passive
-            passivePress={() => console.log('what')}
+            passivePress={showDatePicker}
+            value={getValues('born')}
           />
           <Gap vertical={spaces.semiLarge} />
           <Controller
@@ -141,6 +166,13 @@ const ContactForm = () => {
       <FluidButton onPress={handleSubmit(onAdd)} style={styles.floatButton}>
         Add Contact
       </FluidButton>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        maximumDate={new Date()}
+      />
     </Canvas>
   );
 };
