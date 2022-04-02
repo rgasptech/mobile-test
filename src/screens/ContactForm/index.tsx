@@ -71,6 +71,7 @@ const ContactForm = () => {
             }}
             render={({field: {onChange, value}}) => (
               <PhraseInput
+                autoCapitalize="words"
                 label="Name"
                 placeholder="What do we call it?"
                 onChangeText={onChange}
@@ -89,11 +90,18 @@ const ContactForm = () => {
                 value: true,
                 message: 'Please provide the email address',
               },
+              validate: (str: number | string | undefined) =>
+                !str ||
+                `${str}`?.match(
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi,
+                ) !== null ||
+                'Please provide a valid email address.',
             }}
             render={({field: {onChange, value}}) => (
               <PhraseInput
                 label="Email"
                 placeholder="Where to send the messages?"
+                autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
                 value={value}
