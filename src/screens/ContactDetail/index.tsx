@@ -1,3 +1,4 @@
+import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {View} from 'react-native';
 import Assets from '~assets';
@@ -6,8 +7,16 @@ import {Canvas} from '~components/organisms';
 import colors from '~constants/colors';
 import spaces from '~constants/spaces';
 import {diagonalDp, winWidthPercent} from '~helpers';
+import {useContactDetail, useNavigate} from '~hooks';
+import {RootStackParamList} from '~types';
 
 const ContactDetail = () => {
+  const route = useRoute<RouteProp<RootStackParamList, 'ContactDetail'>>();
+  const navigation = useNavigate();
+
+  const {id} = route?.params || {};
+  const {bio, born, email, name, photo} = useContactDetail(id) || {};
+
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
       <View
@@ -18,6 +27,19 @@ const ContactDetail = () => {
           paddingHorizontal: spaces.semiLarge,
           justifyContent: 'flex-end',
         }}>
+        <Button
+          style={{
+            width: diagonalDp(48),
+            aspectRatio: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'absolute',
+            top: spaces.semiMedium,
+            left: spaces.semiMedium,
+          }}
+          onPress={() => navigation.goBack()}>
+          <Assets.svg.Arrow iconColor={colors.white} />
+        </Button>
         <View
           style={{
             width: diagonalDp(80),
@@ -25,32 +47,25 @@ const ContactDetail = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Picture borderRadius={diagonalDp(80)} />
+          <Picture borderRadius={diagonalDp(80)} uri={photo} />
         </View>
         <Gap vertical={spaces.medium} />
-        <Phrase preset="action">Naufal Name More Than Awesome</Phrase>
+        <Phrase preset="action">{name}</Phrase>
         <Gap vertical={spaces.semiLarge} />
       </View>
       <DummyFlatList usePadding>
         <Gap vertical={spaces.medium} />
         <Phrase color={colors.black90}>Email</Phrase>
         <Gap vertical={spaces.small} />
-        <Phrase preset="subheading">naufal@gmail.com</Phrase>
+        <Phrase preset="subheading">{email}</Phrase>
         <Gap vertical={spaces.medium} />
         <Phrase color={colors.black90}>Date of Birth</Phrase>
         <Gap vertical={spaces.small} />
-        <Phrase preset="subheading">03/02/2015</Phrase>
+        <Phrase preset="subheading">{born || '-'}</Phrase>
         <Gap vertical={spaces.medium} />
         <Phrase color={colors.black90}>Bio</Phrase>
         <Gap vertical={spaces.small} />
-        <Phrase preset="subheading">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget
-          urna a quam porta imperdiet. Nullam et tortor risus. Ut blandit massa
-          convallis ligula aliquam hendrerit. Ut sodales sem non arcu facilisis,
-          vehicula semper ante tristique. Phasellus quis ex sit amet nulla
-          sagittis blandit et in tortor. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Nullam laoreet imperdiet enim ac dictum.
-        </Phrase>
+        <Phrase preset="subheading">{bio || '-'}</Phrase>
       </DummyFlatList>
       <Button
         style={{
