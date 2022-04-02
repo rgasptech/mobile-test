@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {useDispatch, useSelector} from 'react-redux';
+import Assets from '~assets';
 import {Button, DummyFlatList, Gap} from '~components/atoms';
 import {ContactTile, GapSeparator} from '~components/molecules';
 import {Canvas, EmptyPlaceholder, SearchBox} from '~components/organisms';
@@ -77,7 +78,9 @@ const ContactList = () => {
       {isContactAvailable && (
         <Button
           onPress={() => navigation.navigate('ContactForm')}
-          style={styles.circleButton}></Button>
+          style={styles.circleButton}>
+          <Assets.svg.Plus />
+        </Button>
       )}
     </Canvas>
   );

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FetchResponse} from '~types';
+import {FetchResponse, IContact} from '~types';
 
 const fetchContacts = () => {
   return new Promise<FetchResponse>(async (resolved, rejected) => {
@@ -7,18 +7,17 @@ const fetchContacts = () => {
       const {data} = await axios.get(
         'https://s3-sa-east-1.amazonaws.com/rgasp-mobile-test/v1/content.json',
       );
-      if (!!data && Array.isArray(data)) {
-        const contacts = data?.map(item => ({...item, id: item?.name}));
-        resolved({
-          message: 'Data retrieved successfuly',
-          data: contacts,
-          is_success: true,
-        });
-      }
+      const is_success = !!data && Array.isArray(data);
+      const contacts = data?.map((item: IContact) => ({
+        ...item,
+        id: item?.name,
+      }));
       resolved({
-        message: 'Failed to retrieve data',
-        data,
-        is_success: false,
+        message: is_success
+          ? 'Data retrieved successfuly'
+          : 'Failed to retrieve data',
+        data: is_success ? contacts : data,
+        is_success,
       });
     } catch (error) {
       rejected({

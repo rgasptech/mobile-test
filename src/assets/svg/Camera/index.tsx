@@ -4,17 +4,10 @@ import colors from '~constants/colors';
 import spaces from '~constants/spaces';
 import CameraIcon from './Camera.svg';
 
-interface CameraProps extends SvgProps {
-  color?: string;
-  size?: number;
-}
+const size = spaces.semiLarge;
 
-const Camera = ({
-  color = colors.white,
-  size = spaces.medium,
-  ...props
-}: CameraProps) => {
-  return <CameraIcon fill={color} width={size} height={size} {...props} />;
-};
+const Camera = ({...props}: SvgProps) => (
+  <CameraIcon fill={colors.white} width={size} height={size} {...props} />
+);
 
 export default Camera;

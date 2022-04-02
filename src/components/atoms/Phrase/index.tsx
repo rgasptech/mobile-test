@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextProps} from 'react-native';
+import {StyleProp, Text, TextProps, TextStyle} from 'react-native';
 import colors from '~constants/colors';
 import styles from './styles';
 
@@ -17,14 +17,14 @@ const Phrase = ({
   color = colors.black100,
   ...props
 }: PhraseProps) => {
+  const textStyle: StyleProp<TextStyle> = [
+    {textAlign: isCenter ? 'center' : undefined, color},
+    styles[preset],
+    style,
+  ];
+
   return (
-    <Text
-      {...props}
-      style={[
-        {textAlign: isCenter ? 'center' : undefined, color},
-        styles[preset],
-        style,
-      ]}>
+    <Text {...props} style={textStyle}>
       {children}
     </Text>
   );

@@ -4,17 +4,10 @@ import colors from '~constants/colors';
 import spaces from '~constants/spaces';
 import PencilIcon from './Pencil.svg';
 
-interface PencilProps extends SvgProps {
-  color?: string;
-  size?: number;
-}
+const size = spaces.medium;
 
-const Pencil = ({
-  color = colors.white,
-  size = spaces.medium,
-  ...props
-}: PencilProps) => {
-  return <PencilIcon fill={color} width={size} height={size} {...props} />;
-};
+const Pencil = ({...props}: SvgProps) => (
+  <PencilIcon fill={colors.white} width={size} height={size} {...props} />
+);
 
 export default Pencil;

@@ -1,11 +1,11 @@
 import React from 'react';
-import {TextInput, TextInputProps, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 import {Button} from '~components/atoms';
 import colors from '~constants/colors';
 import spaces from '~constants/spaces';
+import {isIos} from '~helpers';
 import {FieldProps} from '~types';
 import styles from './styles';
-import {style} from './utilities';
 
 const Field = ({
   editable,
@@ -14,12 +14,19 @@ const Field = ({
   passivePress,
   ...props
 }: FieldProps) => {
+  const inputStyle = [
+    styles.input,
+    isIos && {
+      paddingVertical: spaces.medium,
+    },
+    multiline && {paddingTop: spaces.medium},
+  ];
   return (
     <View style={styles.inputContainer}>
       <TextInput
         editable={passive ? false : editable}
         placeholderTextColor={colors.white90}
-        style={[style, multiline && {paddingTop: spaces.medium}]}
+        style={inputStyle}
         multiline={multiline}
         {...props}
       />

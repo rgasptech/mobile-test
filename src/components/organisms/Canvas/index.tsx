@@ -17,15 +17,14 @@ const Canvas = ({
   barColor = colors.white,
   backgroundColor = colors.white100,
 }: PropsWithChildren<CanvasProps>) => {
+  const style = [styles.container, {backgroundColor}];
   return (
     <SafeAreaProvider>
       <CustomStatusBar
         backgroundColor={barColor}
         barStyle={isDarkContent ? 'dark-content' : 'light-content'}
       />
-      <GestureHandlerRootView style={[styles.container, {backgroundColor}]}>
-        {children}
-      </GestureHandlerRootView>
+      <GestureHandlerRootView style={style}>{children}</GestureHandlerRootView>
     </SafeAreaProvider>
   );
 };

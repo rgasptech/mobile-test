@@ -12,7 +12,7 @@ interface GapProps {
  * View component for filling gaps. Could receive children.
  * @prop vertical paddingVertical value.
  * @prop horizontal paddingHorizontal value.
- * @prop adapted determine if the value needs to be adapted with widthDp or not.
+ * @prop adapted determine if the value needs to be adapted with diagonalDp or not.
  * @return a view component.
  */
 const Gap = ({

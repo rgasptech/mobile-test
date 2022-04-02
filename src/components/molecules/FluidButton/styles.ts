@@ -4,11 +4,13 @@ import spaces from '~constants/spaces';
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    backgroundColor: colors.secondary,
-    padding: spaces.semiLarge,
-    borderBottomRightRadius: spaces.semiLarge,
-    borderBottomLeftRadius: spaces.semiLarge,
+    flex: 1,
+    paddingVertical: spaces.medium,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: spaces.small,
+    minHeight: 48,
   },
 });
 

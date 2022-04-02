@@ -1,7 +1,6 @@
-import React, {PropsWithChildren, forwardRef} from 'react';
-import {FlatList} from 'react-native-gesture-handler';
-
+import React, {forwardRef, PropsWithChildren} from 'react';
 import {FlatListProps, StyleProp, ViewStyle} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import spaces from '~constants/spaces';
 
 type Omiter<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

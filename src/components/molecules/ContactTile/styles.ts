@@ -10,13 +10,6 @@ const styles = StyleSheet.create({
     width: PROFILE_SIZE,
     height: PROFILE_SIZE,
   },
-  imageContainer: {
-    width: PROFILE_SIZE,
-    aspectRatio: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
 
   nameContainer: {flex: 1},
 });

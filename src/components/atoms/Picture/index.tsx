@@ -1,16 +1,20 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import {
+  ActivityIndicator,
+  ImageProps,
+  ImageStyle,
+  StyleProp,
+  View,
+} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import styles from './styles';
-
-import {ImageProps, ImageStyle, StyleProp} from 'react-native';
 import Assets from '~assets';
 import colors from '~constants/colors';
+import styles from './styles';
 
 type FilteredImageProps = Omit<ImageProps, 'source'>;
 
@@ -30,7 +34,7 @@ const Picture = ({
 }: PictureProps) => {
   const ready = useSharedValue(1);
 
-  const src = !!uri ? {uri} : placeholder;
+  const source = !!uri ? {uri} : placeholder;
 
   const imageStyle = useAnimatedStyle(() => ({
     transform: [
@@ -48,7 +52,7 @@ const Picture = ({
   return (
     <View style={[{borderRadius}, styles.container, style]}>
       <Animated.Image
-        source={src}
+        source={source}
         style={[{borderRadius}, imageStyle, styles.image]}
         resizeMethod="resize"
         onLoad={onLoad}

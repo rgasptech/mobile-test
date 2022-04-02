@@ -17,7 +17,7 @@ const SearchBox = ({editable = true}: SearchBoxProps) => {
         MailBook
       </Phrase>
       <Gap vertical={spaces.medium} />
-      <Field placeholder="Search by name" />
+      <Field placeholder="Search by name" editable={editable} />
     </View>
   );
 };

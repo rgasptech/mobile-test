@@ -1,6 +1,6 @@
 const colors = {
-  black100: '#151515',
   black90: '#3D3C3C',
+  black100: '#151515',
 
   danger: '#A80028',
 
