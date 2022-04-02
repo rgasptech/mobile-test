@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: textSizes['16'],
   },
+  danger: {
+    fontSize: textSizes['12'],
+    color: colors.danger,
+  },
   subheadingBold: {
     fontWeight: 'bold',
     fontSize: textSizes['16'],

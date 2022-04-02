@@ -1,24 +1,31 @@
 import React from 'react';
 import {TextInput, TextInputProps, View} from 'react-native';
+import {Button} from '~components/atoms';
 import colors from '~constants/colors';
 import spaces from '~constants/spaces';
+import {FieldProps} from '~types';
 import styles from './styles';
 import {style} from './utilities';
 
-interface FieldProps extends TextInputProps {}
-
-const Field = ({editable, multiline, ...props}: FieldProps) => {
+const Field = ({
+  editable,
+  multiline,
+  passive,
+  passivePress,
+  ...props
+}: FieldProps) => {
   return (
-    <View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          editable={editable}
-          placeholderTextColor={colors.white90}
-          style={[style, multiline && {paddingTop: spaces.medium}]}
-          multiline={multiline}
-          {...props}
-        />
-      </View>
+    <View style={styles.inputContainer}>
+      <TextInput
+        editable={passive ? false : editable}
+        placeholderTextColor={colors.white90}
+        style={[style, multiline && {paddingTop: spaces.medium}]}
+        multiline={multiline}
+        {...props}
+      />
+      {passive && (
+        <Button onPress={passivePress} style={styles.passiveButton} />
+      )}
     </View>
   );
 };

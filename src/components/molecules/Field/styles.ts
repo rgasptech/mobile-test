@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
     borderRadius: spaces.small,
     paddingHorizontal: spaces.medium,
   },
+
+  passiveButton: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: spaces.medium,
+  },
 });
 
 export default styles;
