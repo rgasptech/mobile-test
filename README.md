@@ -9,9 +9,9 @@
 
 <!-- DEPENDENCIES -->
 <p align="center">
-  <img src="https://img.shields.io/badge/react-17.0.1-green" alt="React 17.0.2" height="24">
-  <img src="https://img.shields.io/badge/react--native-0.64-green" alt="React Native 0.67.4" height="24">
-  <img src="https://img.shields.io/badge/typescript-3.8.3-blue" alt="Typescript 4.4.4" height="24">
+  <img src="https://img.shields.io/badge/react-17.0.2-green" alt="React 17.0.2" height="24">
+  <img src="https://img.shields.io/badge/react--native-0.67.4-green" alt="React Native 0.67.4" height="24">
+  <img src="https://img.shields.io/badge/typescript-4.4.4-blue" alt="Typescript 4.4.4" height="24">
 </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -39,11 +39,11 @@ MailBook is a contact organizer application. You can store various info about yo
 
 ### Search and Display Contacts
 
-<img src="https://user-images.githubusercontent.com/33638021/118388159-e757e900-b64c-11eb-81cc-d82e7b54af1b.gif" alt="Masanda Search Sort Preview" height="600"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/33638021/118388432-a234b680-b64e-11eb-965f-a615299cfa21.gif" alt="Masanda Search Scanned Barcode Preview" height="600">
+<img src="https://user-images.githubusercontent.com/33638021/118388159-e757e900-b64c-11eb-81cc-d82e7b54af1b.gif" alt="Search and Display Contacts" height="600">
 
 ### Add New Contact
 
-<img src="https://user-images.githubusercontent.com/33638021/118388530-51718d80-b64f-11eb-9ba5-d620c44e50eb.gif" alt="Masanda Add New Item with Autopick Barcode" height="600"> &nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/33638021/118391153-0b232b00-b65d-11eb-8ad9-9d586f06bdeb.gif" alt="Masanda  Add New Item with Barcode Scanned" height="600">
+<img src="https://user-images.githubusercontent.com/33638021/118388530-51718d80-b64f-11eb-9ba5-d620c44e50eb.gif" alt="Add New Contact" height="600">
 
 <!-- GETTING STARTED -->
 
@@ -65,7 +65,7 @@ cd mobile-test
 Install all the packages
 
 ```
-yarn install
+yarn install && npx pod-install
 ```
 
 [Run](https://reactnative.dev/docs/running-on-device) the application on your device or use an [iOS simulator](https://reactnative.dev/docs/running-on-simulator-ios)
