@@ -1,4 +1,4 @@
-import {ContactActionTypes, IContact, IContactReducer} from '~types';
+import {ContactReducerParams, IContactReducer} from '~types';
 
 const initialState: IContactReducer = {
   list: [],
@@ -6,16 +6,20 @@ const initialState: IContactReducer = {
 
 const contactsReducer = (
   state = initialState,
-  action: {type: ContactActionTypes; payload: IContact | IContact[]},
+  action: ContactReducerParams,
 ) => {
   switch (action.type) {
     case 'AddBulk':
-      if (Array.isArray(action?.payload))
-        return {...state, list: action?.payload};
+      return {...state, list: action?.payload};
 
     case 'AddContact':
-      if (!Array.isArray(action?.payload))
-        return {...state, list: [...state?.list, action?.payload]};
+      return {...state, list: [...state?.list, action?.payload]};
+
+    case 'DeleteContact':
+      return {
+        ...state,
+        list: state.list.filter(contact => contact.id !== action?.payload),
+      };
 
     default:
       return state;

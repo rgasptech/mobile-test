@@ -1,6 +1,8 @@
+type ContactFormTypes = {id: string} | undefined;
+
 type RootStackParamList = {
   ContactDetail: {id: string};
-  ContactForm: undefined;
+  ContactForm: ContactFormTypes;
   ContactList: undefined;
 };
 

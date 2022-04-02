@@ -68,6 +68,7 @@ const ContactDetail = () => {
         <Phrase preset="subheading">{bio || '-'}</Phrase>
       </DummyFlatList>
       <Button
+        onPress={() => navigation.navigate('ContactForm', {id})}
         style={{
           padding: spaces.medium,
           borderRadius: spaces.small,

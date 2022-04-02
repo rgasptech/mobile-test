@@ -13,15 +13,19 @@ import PhraseInput from '~components/organisms/PhraseInput';
 import spaces from '~constants/spaces';
 import {diagonalDp, isIos} from '~helpers';
 import {useNavigate} from '~hooks';
-import {IContact} from '~types';
+import {IContact, RootStackParamList} from '~types';
 import styles from './styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {useDispatch} from 'react-redux';
-import {dispatchAddContact} from '~redux/actions';
+import {dispatchAddContact, dispatchDeleteContact} from '~redux/actions';
+import {RouteProp, useRoute} from '@react-navigation/native';
 
 const ContactForm = () => {
+  const route = useRoute<RouteProp<RootStackParamList, 'ContactForm'>>();
   const dispatch = useDispatch();
   const navigation = useNavigate();
+
+  const {id} = route?.params || {};
 
   const {
     control,
@@ -45,6 +49,12 @@ const ContactForm = () => {
   const onAdd = (data: IContact) => {
     dispatch(dispatchAddContact({...data, id: `${new Date().getTime()}`}));
     navigation.goBack();
+  };
+
+  const onDelteConfirm = () => {
+    if (!id) return;
+    navigation.pop(2);
+    dispatch(dispatchDeleteContact(id));
   };
 
   const handleConfirm = (date: Date) => {
@@ -72,7 +82,11 @@ const ContactForm = () => {
 
   return (
     <Canvas>
-      <Header />
+      <Header
+        label={!!id ? 'Edit Contact' : 'New Contact'}
+        extraAction={!!id}
+        actionPress={onDelteConfirm}
+      />
       <KeyboardAvoidingView
         behavior={isIos ? 'height' : 'padding'}
         keyboardVerticalOffset={40}>
@@ -166,7 +180,7 @@ const ContactForm = () => {
         </DummyFlatList>
       </KeyboardAvoidingView>
       <FluidButton onPress={handleSubmit(onAdd)} style={styles.floatButton}>
-        Add Contact
+        {!!id ? 'Update Contact' : 'Save Contact'}
       </FluidButton>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
