@@ -1,24 +1,26 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {KeyboardAvoidingView, View} from 'react-native';
+import {KeyboardAvoidingView} from 'react-native';
 import {
   ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {useDispatch} from 'react-redux';
-import Assets from '~assets';
-import {Button, DummyFlatList, Gap, Picture} from '~components/atoms';
+import {DummyFlatList, Gap} from '~components/atoms';
 import {FluidButton, Header} from '~components/molecules';
+import ProfilePhoto from '~components/molecules/ProfilePhoto';
 import {Canvas} from '~components/organisms';
 import PhraseInput from '~components/organisms/PhraseInput';
 import spaces from '~constants/spaces';
-import {diagonalDp, isIos} from '~helpers';
+import {dateFormatter, emailValidate, isIos} from '~helpers';
 import {useContactDetail, useNavigate} from '~hooks';
 import {dispatchContacts} from '~redux/actions';
 import {IContact, RootStackParamList} from '~types';
 import styles from './styles';
+
+const shouldValidate = {shouldValidate: true};
 
 const ContactForm = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ContactForm'>>();
@@ -53,40 +55,41 @@ const ContactForm = () => {
     }, 400);
   }, [id]);
 
+  const buttonLabel = !!id ? 'Update Contact' : 'Save Contact';
+
+  const headerLabel = !!id ? 'Edit Contact' : 'New Contact';
+
   const editSetter = () => {
     if (!id) return;
     setValue('bio', userDetail?.bio);
-    setValue('born', userDetail?.born, {shouldValidate: true});
+    setValue('born', userDetail?.born, shouldValidate);
     setValue('email', userDetail?.email || '');
     setValue('name', userDetail?.name || '');
-    setValue('photo', userDetail?.photo, {shouldValidate: true});
+    setValue('photo', userDetail?.photo, shouldValidate);
   };
 
-  // FIX
   const handleConfirm = (date: Date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const dayFormatted = day < 10 ? `0${day}` : day;
-    const monthFormatted = month < 10 ? `0${month}` : month;
-    setValue('born', `${dayFormatted}/${monthFormatted}/${year}`, {
-      shouldValidate: true,
-    });
+    setValue('born', dateFormatter(date), shouldValidate);
     setIsDatePickerVisible(false);
   };
 
   const hideDatePicker = () => setIsDatePickerVisible(false);
 
-  // FIX
   const onSubmit = (data: IContact) => {
-    !!id
-      ? dispatch(dispatchContacts('UpdateContact', {...data, id}))
-      : dispatch(
-          dispatchContacts('AddContact', {
-            ...data,
-            id: `${new Date().getTime()}`,
-          }),
-        );
+    if (!!id)
+      dispatch(
+        dispatchContacts('UpdateContact', {
+          ...data,
+          id,
+        }),
+      );
+    else
+      dispatch(
+        dispatchContacts('AddContact', {
+          ...data,
+          id: `${new Date().getTime()}`,
+        }),
+      );
     navigation.goBack();
   };
 
@@ -100,7 +103,7 @@ const ContactForm = () => {
     launchImageLibrary({mediaType: 'photo'}, (image: ImagePickerResponse) => {
       if (image.didCancel) return;
       const {uri} = !!image?.assets ? image?.assets[0] : {uri: ''};
-      setValue('photo', uri || '', {shouldValidate: true});
+      setValue('photo', uri || '', shouldValidate);
     });
 
   const showDatePicker = () => setIsDatePickerVisible(true);
@@ -108,7 +111,7 @@ const ContactForm = () => {
   return (
     <Canvas>
       <Header
-        label={!!id ? 'Edit Contact' : 'New Contact'}
+        label={headerLabel}
         extraAction={!!id}
         actionPress={onDelteConfirm}
       />
@@ -117,17 +120,7 @@ const ContactForm = () => {
         keyboardVerticalOffset={40}>
         <DummyFlatList usePadding>
           <Gap vertical={spaces.medium} />
-          <View style={styles.photos}>
-            <View style={styles.photoContainer}>
-              <Picture
-                borderRadius={diagonalDp(128)}
-                uri={getValues('photo')}
-              />
-              <Button style={styles.photoPicker} onPress={onPickPhoto}>
-                <Assets.svg.Camera />
-              </Button>
-            </View>
-          </View>
+          <ProfilePhoto onPress={onPickPhoto} uri={getValues('photo')} />
           <Gap vertical={spaces.xlarge} />
           <Controller
             control={control}
@@ -156,13 +149,7 @@ const ContactForm = () => {
                 value: true,
                 message: 'Please provide the email address',
               },
-              // FIX
-              validate: (str: number | string | undefined) =>
-                !str ||
-                `${str}`?.match(
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi,
-                ) !== null ||
-                'Please provide a valid email address.',
+              validate: emailValidate,
             }}
             render={({field: {onChange, value}}) => (
               <PhraseInput
@@ -212,7 +199,7 @@ const ContactForm = () => {
         style={styles.floatButton}
         // disabled={isValid}
       >
-        {!!id ? 'Update Contact' : 'Save Contact'}
+        {buttonLabel}
       </FluidButton>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

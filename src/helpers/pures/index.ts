@@ -1,3 +1,25 @@
+const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
+
+/**
+ *
+ * @param date
+ * @returns formatted date: DD/MM/YYYY
+ */
+const dateFormatter = (date: Date): string => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const dayFormatted = day < 10 ? `0${day}` : day;
+  const monthFormatted = month < 10 ? `0${month}` : month;
+  return `${dayFormatted}/${monthFormatted}/${year}`;
+};
+
+const emailValidate = (str: number | string | undefined) =>
+  !str ||
+  `${str}`?.match(emailRegex) !== null ||
+  'Please provide a valid email address.';
+
 /**
  *
  * @param array an array as the source.
@@ -15,4 +37,4 @@ const updateElement = <T>(
   return updatedList;
 };
 
-export {updateElement};
+export {dateFormatter, emailValidate, updateElement};
