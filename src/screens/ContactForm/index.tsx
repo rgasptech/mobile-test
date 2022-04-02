@@ -16,11 +16,7 @@ import PhraseInput from '~components/organisms/PhraseInput';
 import spaces from '~constants/spaces';
 import {diagonalDp, isIos} from '~helpers';
 import {useContactDetail, useNavigate} from '~hooks';
-import {
-  dispatchAddContact,
-  dispatchDeleteContact,
-  dispatchUpdateContact,
-} from '~redux/actions';
+import {dispatchContacts} from '~redux/actions';
 import {IContact, RootStackParamList} from '~types';
 import styles from './styles';
 
@@ -66,6 +62,7 @@ const ContactForm = () => {
     setValue('photo', userDetail?.photo, {shouldValidate: true});
   };
 
+  // FIX
   const handleConfirm = (date: Date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -80,17 +77,23 @@ const ContactForm = () => {
 
   const hideDatePicker = () => setIsDatePickerVisible(false);
 
+  // FIX
   const onSubmit = (data: IContact) => {
     !!id
-      ? dispatch(dispatchUpdateContact({...data, id}))
-      : dispatch(dispatchAddContact({...data, id: `${new Date().getTime()}`}));
+      ? dispatch(dispatchContacts('UpdateContact', {...data, id}))
+      : dispatch(
+          dispatchContacts('AddContact', {
+            ...data,
+            id: `${new Date().getTime()}`,
+          }),
+        );
     navigation.goBack();
   };
 
   const onDelteConfirm = () => {
     if (!id) return;
     navigation.pop(2);
-    dispatch(dispatchDeleteContact(id));
+    dispatch(dispatchContacts('DeleteContact', id));
   };
 
   const onPickPhoto = () =>
@@ -121,7 +124,7 @@ const ContactForm = () => {
                 uri={getValues('photo')}
               />
               <Button style={styles.photoPicker} onPress={onPickPhoto}>
-                <Assets.svg.Camera size={spaces.semiLarge} />
+                <Assets.svg.Camera />
               </Button>
             </View>
           </View>
@@ -153,6 +156,7 @@ const ContactForm = () => {
                 value: true,
                 message: 'Please provide the email address',
               },
+              // FIX
               validate: (str: number | string | undefined) =>
                 !str ||
                 `${str}`?.match(
@@ -203,7 +207,11 @@ const ContactForm = () => {
           <Gap vertical={spaces.semiLarge} />
         </DummyFlatList>
       </KeyboardAvoidingView>
-      <FluidButton onPress={handleSubmit(onSubmit)} style={styles.floatButton}>
+      <FluidButton
+        onPress={handleSubmit(onSubmit)}
+        style={styles.floatButton}
+        // disabled={isValid}
+      >
         {!!id ? 'Update Contact' : 'Save Contact'}
       </FluidButton>
       <DateTimePickerModal

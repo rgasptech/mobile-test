@@ -10,7 +10,7 @@ import colors from '~constants/colors';
 import {skeleton} from '~constants/skeletons';
 import spaces from '~constants/spaces';
 import {useNavigate} from '~hooks';
-import {dispatchAddContacts} from '~redux/actions';
+import {dispatchContacts} from '~redux/actions';
 import {fetchContacts} from '~services';
 import {IContact, ReduxState} from '~types';
 import styles from './styles';
@@ -36,7 +36,7 @@ const ContactList = () => {
     }
     setIsLoading(true);
     const {is_success, data} = await fetchContacts();
-    if (is_success) dispatch(dispatchAddContacts(data));
+    if (is_success) dispatch(dispatchContacts('AddBulk', data));
     setIsLoading(false);
   };
 

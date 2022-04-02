@@ -1,3 +1,4 @@
+import {updateElement} from '~helpers';
 import {ContactReducerParams, IContactReducer} from '~types';
 
 const initialState: IContactReducer = {
@@ -22,11 +23,9 @@ const contactsReducer = (
       };
 
     case 'UpdateContact':
-      const updatedList = [...state.list];
-      const targetIndex = updatedList.findIndex(
-        contact => contact.id === action?.payload?.id,
+      const updatedList = updateElement(state.list, action?.payload, list =>
+        list.findIndex(contact => contact.id === action?.payload?.id),
       );
-      Object.assign(updatedList[targetIndex], action?.payload);
       return {...state, list: updatedList};
 
     default:
