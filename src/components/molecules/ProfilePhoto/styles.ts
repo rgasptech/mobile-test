@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
+    minHeight: 48,
   },
   photos: {justifyContent: 'center', alignItems: 'center'},
 });

@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
+import {useSharedValue} from 'react-native-reanimated';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {useDispatch, useSelector} from 'react-redux';
 import {DummyFlatList, Gap} from '~components/atoms';
@@ -17,13 +18,18 @@ import {IContact, ReduxState} from '~types';
 import styles from './styles';
 import {keyExtractor} from './utilities';
 
+type OnScrollType = NativeSyntheticEvent<NativeScrollEvent>;
+
 const ContactList = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const {contacts} = useSelector((state: ReduxState) => state);
 
+  const scrollY = useSharedValue(0);
+
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState('');
+  const [headerHeight, setHeaderHeight] = useState(140);
 
   const contactList = useMemo(
     () => searchContact(contacts.list, keyword),
@@ -40,15 +46,23 @@ const ContactList = () => {
 
   const isShowFloatButton = (!keyword && isContactAvailable) || !isSearchEmpty;
 
+  const captureScroll = (e: OnScrollType) =>
+    (scrollY.value = e.nativeEvent.contentOffset.y);
+
   const getContactsInfo = async () => {
     if (isContactAvailable) {
       setIsLoading(false);
       return;
     }
     setIsLoading(true);
-    const {is_success, data} = await fetchContacts();
-    if (is_success) dispatch(dispatchContacts('AddBulk', data));
-    setIsLoading(false);
+    try {
+      const {is_success, data} = await fetchContacts();
+      if (!is_success) return;
+      dispatch(dispatchContacts('AddBulk', data));
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onAddContact = () => navigation.navigate('ContactForm');
@@ -60,8 +74,8 @@ const ContactList = () => {
 
   return (
     <Canvas barColor={colors.secondary} isDarkContent={false}>
-      <DummyFlatList>
-        <SearchBox editable={isContactAvailable} onChange={setKeyword} />
+      <DummyFlatList onScroll={captureScroll}>
+        <Gap vertical={headerHeight} />
         <Gap vertical={spaces.semiLarge} />
         <SkeletonContent
           containerStyle={styles.skeleton}
@@ -90,7 +104,14 @@ const ContactList = () => {
             />
           )}
         </SkeletonContent>
+        <Gap vertical={spaces.xxlarge} />
       </DummyFlatList>
+      <SearchBox
+        editable={isContactAvailable}
+        onChange={setKeyword}
+        heightSetter={height => setHeaderHeight(height)}
+        scrollY={scrollY}
+      />
       {isShowFloatButton && <FloatRounded onPress={onAddContact} />}
     </Canvas>
   );

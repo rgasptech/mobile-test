@@ -1,12 +1,17 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {KeyboardAvoidingView} from 'react-native';
+import {Keyboard, KeyboardAvoidingView} from 'react-native';
 import {
   ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import {useDispatch} from 'react-redux';
 import {DummyFlatList, Gap} from '~components/atoms';
 import {FluidButton, Header} from '~components/molecules';
@@ -25,6 +30,8 @@ const shouldValidate = {shouldValidate: true};
 const ContactForm = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ContactForm'>>();
   const {id} = route?.params || {};
+
+  const floatPosition = useSharedValue<number>(0);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -55,6 +62,22 @@ const ContactForm = () => {
     }, 400);
   }, [id]);
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => (floatPosition.value = withTiming(100)),
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => (floatPosition.value = withTiming(0)),
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+
   const buttonLabel = !!id ? 'Update Contact' : 'Save Contact';
 
   const headerLabel = !!id ? 'Edit Contact' : 'New Contact';
@@ -67,6 +90,10 @@ const ContactForm = () => {
     setValue('name', userDetail?.name || '');
     setValue('photo', userDetail?.photo, shouldValidate);
   };
+
+  const floatStyle = useAnimatedStyle(() => ({
+    transform: [{translateY: floatPosition.value}],
+  }));
 
   const handleConfirm = (date: Date) => {
     setValue('born', dateFormatter(date), shouldValidate);
@@ -116,8 +143,8 @@ const ContactForm = () => {
         actionPress={onDelteConfirm}
       />
       <KeyboardAvoidingView
-        behavior={isIos ? 'height' : 'padding'}
-        keyboardVerticalOffset={isIos ? 40 : 16}>
+        behavior={'height'}
+        keyboardVerticalOffset={isIos ? 40 : 24}>
         <DummyFlatList usePadding>
           <Gap vertical={spaces.medium} />
           <ProfilePhoto onPress={onPickPhoto} uri={getValues('photo')} />
@@ -194,12 +221,14 @@ const ContactForm = () => {
           <Gap vertical={spaces.semiLarge} />
         </DummyFlatList>
       </KeyboardAvoidingView>
-      <FluidButton
-        onPress={handleSubmit(onSubmit)}
-        style={styles.floatButton}
-        disabled={!isValid}>
-        {buttonLabel}
-      </FluidButton>
+      <Animated.View style={[styles.floatButton, floatStyle]}>
+        <FluidButton
+          onPress={handleSubmit(onSubmit)}
+          style={styles.button}
+          disabled={!isValid}>
+          {buttonLabel}
+        </FluidButton>
+      </Animated.View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"

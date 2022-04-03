@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   image: {
     width: PROFILE_SIZE,
     height: PROFILE_SIZE,
+    minHeight: 48,
   },
 
   nameContainer: {flex: 1},

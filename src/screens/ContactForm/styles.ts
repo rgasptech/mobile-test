@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
 import spaces from '~constants/spaces';
-import {winWidthPercent} from '~helpers';
 
 const styles = StyleSheet.create({
+  button: {
+    width: '100%',
+  },
   floatButton: {
     position: 'absolute',
-    width: winWidthPercent(100) - spaces.semiLarge * 2,
-    left: spaces.semiLarge,
     bottom: spaces.semiLarge,
+    paddingHorizontal: spaces.semiLarge,
+    width: '100%',
   },
 });
 
