@@ -25,6 +25,7 @@
   - [Installation](#installation)
   - [Generate Android Debug APK](#generate)
 - [Download](#download)
+- [Used Packages](#packages)
 
 <!-- BACKGROUND -->
 
@@ -96,3 +97,11 @@ mobile-test/android/app/build/outputs/apk/debug/app-debug.apk
 ## Download <a name="download"></a>
 
 Get the android released version [here](https://drive.google.com/file/d/1hmvaQT6HzoHPycIhqzF_3Jn1nZW1d-cF/view?usp=sharing).
+
+<!-- PACKAGES -->
+
+## Used Packages <a name="packages"></a>
+
+### @react-native-async-storage/async-storage
+
+Capable of storing data in phone storage.
