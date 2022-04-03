@@ -59,7 +59,11 @@ MailBook is a contact organizer application. You can store various info about yo
 
 ### Installation <a name="installation"></a>
 
-Clone this [repo](https://github.com/TaufanP/mobile-test) then open the directory with your terminal
+Clone this [repo](https://github.com/TaufanP/mobile-test) then open the directory with your terminal by executing
+
+```
+git clone https://github.com/TaufanP/mobile-test.git
+```
 
 ```
 cd mobile-test
