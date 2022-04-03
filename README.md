@@ -72,7 +72,13 @@ cd mobile-test
 Install all the packages
 
 ```
-yarn install && npx pod-install
+yarn install
+```
+
+If you want to run in iOS and you are using Mac OS, please execute pod
+
+```
+npx pod-install
 ```
 
 [Run](https://reactnative.dev/docs/running-on-device) the application on your device or use an [iOS simulator](https://reactnative.dev/docs/running-on-simulator-ios)
