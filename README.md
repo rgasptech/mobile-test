@@ -26,6 +26,7 @@
   - [Generate Android Debug APK](#generate)
 - [Download](#download)
 - [Used Packages](#packages)
+- [Future Updates](#updates)
 
 <!-- BACKGROUND -->
 
@@ -167,3 +168,9 @@ requires
 ```
 
 Persist storage data in local storage.
+
+<!-- UPDATES -->
+
+## Future Updates <a name="updates"></a>
+
+Going to make contact deletion process safer. Currently, haven't implemented confirmation dialog when deleting a contact.
