@@ -44,7 +44,7 @@ MailBook is a contact organizer application. You can store various info about yo
 
 ### Add New Contact
 
-<img src="https://user-images.githubusercontent.com/33638021/118388530-51718d80-b64f-11eb-9ba5-d620c44e50eb.gif" alt="Add New Contact" height="600">
+<img src="https://user-images.githubusercontent.com/33638021/161407620-197f27cb-3ec3-451f-beb7-6ee203213cd7.gif" alt="Add New Contact" height="600">
 
 <!-- GETTING STARTED -->
 
@@ -95,4 +95,4 @@ mobile-test/android/app/build/outputs/apk/debug/app-debug.apk
 
 ## Download <a name="download"></a>
 
-Get the android released version [here](http://bit.ly/MasandaApp).
+Get the android released version [here](https://drive.google.com/file/d/1hmvaQT6HzoHPycIhqzF_3Jn1nZW1d-cF/view?usp=sharing).
