@@ -27,6 +27,7 @@ const ContactDetail = () => {
         <ContactInfo label="Email" value={email} />
         <ContactInfo label="Date of Birth" value={born} />
         <ContactInfo label="Bio" value={bio} />
+        <Gap vertical={spaces.xxlarge} />
       </DummyFlatList>
       <EditButton onPress={onPressEdit} />
     </Canvas>

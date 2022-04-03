@@ -19,7 +19,7 @@ import ProfilePhoto from '~components/molecules/ProfilePhoto';
 import {Canvas} from '~components/organisms';
 import PhraseInput from '~components/organisms/PhraseInput';
 import spaces from '~constants/spaces';
-import {dateFormatter, emailValidate, isIos} from '~helpers';
+import {dateFormatter, diagonalDp, emailValidate, isIos} from '~helpers';
 import {useContactDetail, useNavigate} from '~hooks';
 import {dispatchContacts} from '~redux/actions';
 import {IContact, RootStackParamList} from '~types';
@@ -144,7 +144,7 @@ const ContactForm = () => {
       />
       <KeyboardAvoidingView
         behavior={'height'}
-        keyboardVerticalOffset={isIos ? 40 : 24}>
+        keyboardVerticalOffset={isIos ? 40 : diagonalDp(32)}>
         <DummyFlatList usePadding>
           <Gap vertical={spaces.medium} />
           <ProfilePhoto onPress={onPickPhoto} uri={getValues('photo')} />
@@ -218,7 +218,6 @@ const ContactForm = () => {
             )}
             name="bio"
           />
-          <Gap vertical={spaces.semiLarge} />
         </DummyFlatList>
       </KeyboardAvoidingView>
       <Animated.View style={[styles.floatButton, floatStyle]}>
