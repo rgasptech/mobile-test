@@ -102,6 +102,68 @@ Get the android released version [here](https://drive.google.com/file/d/1hmvaQT6
 
 ## Used Packages <a name="packages"></a>
 
-### @react-native-async-storage/async-storage
+#### @react-navigation/native
 
-Capable of storing data in phone storage.
+requires
+
+```
+@react-navigation/stack react-native-gesture-handler react-native-safe-area-context react-native-screens
+```
+
+Manage application's navigation between screens.
+
+#### react-native-modal-datetime-picker
+
+requires
+
+```
+@react-native-community/datetimepicker
+```
+
+Provides date picker in native version on each platform.
+
+#### axios
+
+Manage API calls and handles its responses.
+
+#### react-hook-form
+
+Helps to maintain text input abilities to manage user's inputs.
+
+#### react-native-image-picker
+
+Use native image picker on each platforms.
+
+#### react-native-reanimated
+
+Provides various ways to maintain app animations.
+
+#### react-native-skeleton-content-nonexpo
+
+requires
+
+```
+react-native-linear-gradient
+```
+
+Display skeleton loading.
+
+#### react-native-svg-transformer
+
+requires
+
+```
+react-native-svg
+```
+
+Allows to convert SVG files into React component.
+
+#### redux-persist
+
+requires
+
+```
+@react-native-async-storage/async-storage redux react-redux
+```
+
+Persist storage data in local storage.
