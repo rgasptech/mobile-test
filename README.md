@@ -102,7 +102,7 @@ Get the android released version [here](https://drive.google.com/file/d/1hmvaQT6
 
 ## Used Packages <a name="packages"></a>
 
-#### @react-navigation/native
+### @react-navigation/native
 
 requires
 
@@ -112,7 +112,7 @@ requires
 
 Manage application's navigation between screens.
 
-#### react-native-modal-datetime-picker
+### react-native-modal-datetime-picker
 
 requires
 
@@ -122,23 +122,23 @@ requires
 
 Provides date picker in native version on each platform.
 
-#### axios
+### axios
 
 Manage API calls and handles its responses.
 
-#### react-hook-form
+### react-hook-form
 
 Helps to maintain text input abilities to manage user's inputs.
 
-#### react-native-image-picker
+### react-native-image-picker
 
 Use native image picker on each platforms.
 
-#### react-native-reanimated
+### react-native-reanimated
 
 Provides various ways to maintain app animations.
 
-#### react-native-skeleton-content-nonexpo
+### react-native-skeleton-content-nonexpo
 
 requires
 
@@ -148,7 +148,7 @@ react-native-linear-gradient
 
 Display skeleton loading.
 
-#### react-native-svg-transformer
+### react-native-svg-transformer
 
 requires
 
@@ -158,7 +158,7 @@ react-native-svg
 
 Allows to convert SVG files into React component.
 
-#### redux-persist
+### redux-persist
 
 requires
 
