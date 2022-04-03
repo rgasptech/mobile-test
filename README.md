@@ -40,7 +40,7 @@ MailBook is a contact organizer application. You can store various info about yo
 
 ### Search and Display Contacts
 
-<img src="https://user-images.githubusercontent.com/33638021/118388159-e757e900-b64c-11eb-81cc-d82e7b54af1b.gif" alt="Search and Display Contacts" height="600">
+<img src="https://user-images.githubusercontent.com/33638021/161407582-f61ac5b9-c357-46f9-8067-1ed26c1e2017.gif" alt="Search and Display Contacts" height="600">
 
 ### Add New Contact
 

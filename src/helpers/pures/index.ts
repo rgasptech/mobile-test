@@ -28,10 +28,12 @@ const emailValidate = (str: number | string | undefined) =>
  * @param keyword name input
  * @returns contacts that the name property contain the keyword
  */
-const searchContact = (list: IContact[], keyword: string) =>
-  list.filter(contact =>
+const searchContact = (list: IContact[], keyword: string) => {
+  if (!keyword) return list;
+  return list.filter(contact =>
     contact.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()),
   );
+};
 
 /**
  *

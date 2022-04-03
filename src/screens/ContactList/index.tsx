@@ -27,7 +27,7 @@ const ContactList = () => {
 
   const contactList = useMemo(
     () => searchContact(contacts.list, keyword),
-    [contacts.list, keyword],
+    [contacts.list, keyword, isLoading],
   );
 
   useEffect(() => {
@@ -36,10 +36,9 @@ const ContactList = () => {
 
   const isContactAvailable = !!contacts && !!contacts?.list?.length;
 
-  const isSearchAvailable = !!keyword && contactList.length !== 0;
+  const isSearchEmpty = !!keyword && contactList.length === 0;
 
-  const isShowFloatButton =
-    (!keyword && isContactAvailable) || isSearchAvailable;
+  const isShowFloatButton = (!keyword && isContactAvailable) || !isSearchEmpty;
 
   const getContactsInfo = async () => {
     if (isContactAvailable) {
@@ -70,6 +69,7 @@ const ContactList = () => {
           layout={skeleton.contactList}>
           {isContactAvailable ? (
             <FlatList
+              listKey="contacts"
               data={contactList}
               keyExtractor={keyExtractor}
               ItemSeparatorComponent={GapSeparator}
@@ -82,7 +82,7 @@ const ContactList = () => {
               onPress={onAddContact}
             />
           )}
-          {!isSearchAvailable && (
+          {isSearchEmpty && (
             <EmptyPlaceholder
               desc="You could try different name or add a new one."
               title="None matched"
