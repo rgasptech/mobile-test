@@ -4,6 +4,7 @@ import spaces from '~constants/spaces';
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
     width: '100%',
     backgroundColor: colors.secondary,
     padding: spaces.semiLarge,
